@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static '/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static '/bootstrap-5.0.2-dist/css/bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static '/css/main.css' %}" />
+    <title>Dashboard {% if title %} - {{title}} {% endif %}</title>
+  </head>
+  <body>
+    <div class="overall">
+      <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+          <div class="logotitle">
+            <h4>TMS</h4>
+          </div>
+        </div>
+
+        <div class="links">
+          <ul>
+            <li class="active">
+              <span class="icon">
+                <i class="fa fa-car" aria-hidden="true"></i>
+              </span>
+              <a href="{% url 'home' %}" class="sidebar-links">Cars</a>
+            </li>
+            <li class="">
+              <span class="icon">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+              <a href="{% url 'drivers' %}" class="sidebar-links">Drivers</a>
+            </li>
+            <li>
+              <span class="icon">
+                <i class="fa fa-money" aria-hidden="true"></i>
+              </span>
+              <a href="{% url 'salaries' %}" class="sidebar-links">Salaries</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="mainsection" class="main">
+        <div class="main-header">
+          <div class="left">
+            <a href="#" id="togglesidebar">
+              <i class="fa fa-bars"></i>
+            </a>
+          </div>
+          <div class="right d-flex">
+            <div class="icon me-2"><i class="fa fa-bell"></i></div>
+            {% if user.is_superuser %}
+            <a href="/admin" target="_blank" class="s-link me-2">Super Admin</a>
+            {% endif %}
+            <a href="{% url 'logout' %}" class="s-link me-2">Logout</a>
+          </div>
+        </div>
+        <div id="main-section-down">
+          {% include "cars/includes/messages.html" %}{% block content %}
+          {%endblock %}
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block script %} {% endblock %}
+  </body>
+</html>

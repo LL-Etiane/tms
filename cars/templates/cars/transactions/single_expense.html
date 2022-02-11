@@ -1,0 +1,44 @@
+{% extends 'cars/master.html' %} {% block content %} {% load static %}
+<div class="container">
+  <div class="my-2 p-2">
+    <a href="{% url 'single_car' exp.car.id %}" class="btn btn-sm btn-primary">
+      Back
+    </a>
+  </div>
+  <div class="mt-2 p-2 elevate">
+    <div class="d-flex justify-content-between">
+      <h4>{{exp.name}}</h4>
+      <h4>On: {{exp.date}}</h4>
+    </div>
+    <div class="row border border-rounded">
+      <div class="col-md-6 p-2">
+        <h4>Description:</h4>
+        <p>{{exp.description}}</p>
+      </div>
+      <div class="col-md-6 p-6">
+        <h4>Amount:</h4>
+        <p>{{exp.amount}} fcfa</p>
+      </div>
+    </div>
+    <div class="d-flex p-2 justify-content-between">
+      <div class="">
+        <h4>Belongs to:</h4>
+        <h6>{{exp.car}}</h6>
+      </div>
+      <div class="">
+        <h4>Transaction Id</h4>
+        <h6>{{exp.transaction_id}}</h6>
+      </div>
+    </div>
+    <div class="p-2 text-center">
+      <a
+        href="{% url 'generate_expense_pdf' exp.id %}"
+        class="btn btn-sm btn-primary"
+        target="blank"
+      >
+        Print
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

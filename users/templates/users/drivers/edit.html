@@ -1,0 +1,76 @@
+{% extends 'cars/master.html' %} {% block content %}
+<div class="container">
+  <div class="elevate my-2 p-2">
+    <h2>Edit driver: <strong>{{driver.name}}</strong></h2>
+    <form
+      method="POST"
+      action="{% url 'create_driver' %}"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name">Driver's full name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="category">Driving category</label>
+            <select name="category" id="category" class="form-control" required>
+              <option>--Select category--</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+            </select>
+          </div>
+          <div class="form-goup">
+            <label for="nic">National identity card number</label>
+            <input
+              type="number"
+              name="nic"
+              id="nic"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="image">Driver's image</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="driving_license">Driver's driving license</label>
+            <input
+              type="file"
+              name="driving_license"
+              id="driving_license"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="text-center my-2">
+        <input type="submit" value="Edit" class="btn btn-sm btn-primary" />
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

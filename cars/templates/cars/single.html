@@ -1,0 +1,141 @@
+{% extends 'cars/master.html' %} {% load static %} {% block content %}
+<div class="container" id="singleCar">
+  <div class="elevate my-2 p-2">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Matricule: <strong>{{car.matricule}}</strong></h4>
+        <h4>Car type: <strong>{{car.car_type}}</strong></h4>
+        <h4>Price: <strong>{{car.price}} FCFA</strong></h4>
+        <h4>
+          Kilometres Bought With:
+          <strong>{{car.kilometres_bought_with}}</strong>
+        </h4>
+        <hr />
+        {% if car.driver_set.all %}
+        <h4>Current drivers assigned to this car</h4>
+        {% for driver in car.driver_set.all %}
+        <div class="">
+          shift: <strong>{{driver.shift.type}}</strong> Driver:
+          <strong>{{driver.name}}</strong>
+        </div>
+        {% endfor %} {% else %}
+        <h4>This car does not yet have a driver assigned to it</h4>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <h4>Date bought: <strong>{{car.date_bought}}</strong></h4>
+        <h4>Date put in use: <strong>{{car.date_put_to_use}}</strong></h4>
+        <hr />
+        <h4>Day registered in system: <strong>{{car.date_created}}</strong></h4>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <a
+          href="{% url 'edit_car' car.id %}"
+          class="btn btn-primary btn-sm mx-2"
+          >Edit information</a
+        >
+        <a
+          href="{% url 'car_transactions' car.id %}"
+          class="btn btn-primary btn-sm mx-2"
+          >View Transaction Records</a
+        >
+        <a
+          href="{% url 'car_documents' car.id %}"
+          class="btn btn-primary btn-sm mx-2"
+          >Documents</a
+        >
+      </div>
+      <div class="">
+        <form
+          action="{% url 'delete_car' car.id %}"
+          method="POST"
+          @submit.prevent="deleteCar"
+          ref="delete_form"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="elevate my-2 p-2">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Recent Revenues</h4>
+            <table class="table border-right">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for rev in revenues %}
+                <tr>
+                  <td>{{rev.id}}</td>
+                  <td>{{rev.name}}</td>
+                  <td>{{rev.amount}}</td>
+                  <td>
+                    <a
+                      href="{% url 'single_revenue' rev.id %}"
+                      class="btn btn-primary btn-sm"
+                    >
+                      view
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <h4>Recent Expenses</h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for exp in expenses %}
+                <tr>
+                  <td>{{exp.id}}</td>
+                  <td>{{exp.name}}</td>
+                  <td>{{exp.amount}}</td>
+                  <td>
+                    <a
+                      href="{% url 'single_expense' exp.id %}"
+                      class="btn btn-primary btn-sm"
+                    >
+                      view
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h4 class="text-center">Car summary</h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block script %}
+<script src="{% static 'js/axios.min.js' %}"></script>
+<script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/car/single_car.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'cars/master.html' %} {% block content %}
+<div class="container">
+  <div class="elevate p-2">
+    <h1 class="text-center">Driver details</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <span>
+          Driver name:
+          <strong>{{driver.name}}</strong> </span
+        ><br />
+        <span>
+          Driver driving Catergory: <strong>{{driver.category}}</strong>
+        </span>
+        <br />
+        {% if driver.car.all %}
+        <span> Shift: <strong>{{driver.shift.type}}</strong> </span><br />
+        {% for car in driver.car.all %}
+        <span>
+          Car driving: <strong>{{car.matricule}}</strong>
+          <a href="{% url 'single_car' car.id %}">view</a>
+        </span>
+        <br />
+        {% endfor %} {% else %}
+        <h4>
+          This driver has not yet been assigned a car,
+          <a href="{% url 'home' %}">go to cars</a>
+        </h4>
+        {% endif %}
+        <span> NIC: <strong>{{driver.nic}}</strong> </span>
+      </div>
+      <div class="col-md-6">
+        <div class="driver-img-container d-flex">
+          <h4 class="my-1">Driver's image:</h4>
+          <a href="{{ driver.image.url }}">
+            <img
+              class="driver-img-main ms-4"
+              src="{{ driver.image.url }}"
+              alt=""
+            />
+          </a>
+        </div>
+        <hr />
+        <div class="driving-license-container d-flex">
+          <h4>Driver's License</h4>
+          <a href="{{driver.driving_license.url}}">
+            <img
+              class="driver-img-main ms-4"
+              src="{{ driver.driving_license.url }}"
+              alt=""
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--actions area-->
+<div class="container my-2">
+  <div class="elevate p-2 d-flex justify-content-between">
+    <div class="">
+      <!-- <a href="{% url 'edit_driver' driver.id %}" class="btn btn-sm btn-primary"
+        >Edit information</a
+      > -->
+    </div>
+    <div class="danger-actions">
+      <form action="{% url 'delete_driver' driver.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Delete" class="btn btn-sm btn-danger" />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block script %} {% endblock%}

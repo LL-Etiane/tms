@@ -1,0 +1,110 @@
+{% extends 'cars/master.html' %} {% block content %}
+<div class="container">
+  <div class="container">
+    <h1>Edit {{car.matricule}} type: {{car.car_type}}</h1>
+    <form method="POST" action="{% url 'edit_car' car.id %}">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-8 elevate">
+          <div class="form-group">
+            <label for="matricule">Car Matricule</label>
+            <input
+              type="text"
+              name="matricule"
+              id="matricule"
+              class="form-control"
+              value="{{car.matricule}}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="car_type">Car Type</label>
+            <input
+              type="text"
+              name="car_type"
+              id="car_type"
+              class="form-control"
+              value="{{car.car_type}}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="date_bought">Date Bought</label>
+            <input
+              type="date"
+              name="date_bought"
+              id="date_bought"
+              class="form-control"
+              value="{{car.date_bought|date:'Y-m-d'}}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="date_put_to_use">Date put in to use</label>
+            <input
+              type="date"
+              name="date_put_to_use"
+              id="date_put_to_use"
+              class="form-control"
+              value="{{car.date_put_to_use|date:'Y-m-d'}}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              class="form-control"
+              value="{{car.price}}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="kilometres_bought_with">Kilometres bought with</label>
+            <input
+              type="number"
+              name="kilometres_bought_with"
+              id="kilometres_bought_with"
+              class="form-control"
+              value="{{car.kilometres_bought_with}}"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-3 elevate ms-2">
+          <h4>Select Driver</h4>
+
+          {% if driver_set %}
+          <h6>Current drivers assigned to this car</h6>
+          {% for driver in driver_set %}
+          <div class="">
+            shift: <strong>{{driver.shift.type}}</strong> Driver:
+            <strong>{{driver.name}}</strong>
+          </div>
+          {% endfor %} {% else %}
+          <h6>This car does not yet have a driver assigned to it</h6>
+          {% endif %} {% for shift in shifts %}
+          <div class="form-group mb-2">
+            <label for="driver">Driver ({{shift.type}} shift)</label>
+            <select
+              name="driver_{{shift.type}}"
+              id="driver"
+              class="form-control"
+            >
+              {% if car.driverset %} dd {% endif %}
+              <option value="">----------</option>
+              {% for driver in drivers %}
+              <option value="{{driver.id}}">{{driver.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <input type="submit" value="Save" class="mt-2 btn btn-primary btn-sm" />
+    </form>
+  </div>
+  {% endblock %}
+</div>

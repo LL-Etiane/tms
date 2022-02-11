@@ -1,0 +1,64 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Okay</title>
+    <style>
+      .identity {
+        background-color: #3333d8;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .content {
+        font-size: 14px;
+        text-align: center;
+      }
+
+      table {
+        border: 1px solid #000;
+        padding: 5px 0 0 0;
+      }
+
+      .owner-infor {
+        font-size: 12px;
+        text-align: right;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="identity">
+      Destiny Cars <br />
+      Revenue receipt
+    </div>
+    <div class="content">
+      <table>
+        <thead>
+          <tr class="headings">
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{date}}</td>
+            <td><strong>{{name}}</strong>: {{description}}</td>
+            <td>{{amount}} FCFA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="owner-infor">
+      Generated on: {{generated_date}} at {{generated_time}} <br />
+      By: <span class="name">{{by}}</span>
+    </div>
+  </body>
+</html>

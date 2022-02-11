@@ -1,0 +1,166 @@
+{% extends 'cars/master.html' %} {% block content %} {% load static %}
+<div id="car-document-container">
+  <div class="container">
+    <h1>{{car.matricule}} ({{car.car_type}}) Documents</h1>
+  </div>
+  <hr />
+  <div class="container">
+    <table class="table elevate">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date paid</th>
+          <th>Expiry Date</th>
+          <th>Days remaining</th>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% if documents %} {% for doc in documents %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{doc.type}}</td>
+          <td>{{doc.amount}}</td>
+          <td>{{doc.date_paid}}</td>
+          <td>{{doc.expiry_date}}</td>
+          <td>TO DO</td>
+          <td>
+            <a
+              href="{{doc.image.url}}"
+              class="btn btn-sm btn-primary"
+              target="blank"
+            >
+              View receipt
+            </a>
+          </td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td colspan="5"><h1>No document registered yet</h1></td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+    <hr />
+    <div class="elevate my-2 p-2">
+      <h1>Add payment of a new document</h1>
+      <form
+        method="POST"
+        action="{% url 'car_documents' car.id %}"
+        enctype="multipart/form-data"
+      >
+        {%csrf_token%}
+        <div class="form-group">
+          <label for="doc">
+            <span v-if="!showOtherDocInput">Select</span>
+            <span v-if="showOtherDocInput">Type name of</span> document you are
+            registering</label
+          >
+          <div class="" v-if="showOtherDocInput">
+            <input
+              type="text"
+              name="doc"
+              id="doc"
+              class="form-control"
+              required
+            />
+            <button
+              class="my-2 btn btn-sm btn-primary"
+              @click="showOtherDocInput=false"
+            >
+              Select instead
+            </button>
+          </div>
+          <select
+            name="doc"
+            id="doc"
+            class="form-control"
+            v-model="doc"
+            @change="docCHanged"
+            v-if="!showOtherDocInput"
+            required
+          >
+            <option value="">----Select document----</option>
+            <option value="Categrizz">Categrizz</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Visite technique">Visite technique</option>
+            <option value="Carte bleu">Carte blue</option>
+            <option value="License de transport">License de transport</option>
+            <option value="Import">Import</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description (optional)</label>
+          <textarea
+            name="description"
+            id="description"
+            class="form-control"
+          ></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="date_paid">Date paid</label>
+              <input
+                type="date"
+                name="date_paid"
+                id="date_paid"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="expiry_date">Expiry date</label>
+              <input
+                type="date"
+                name="expiry_date"
+                id="expiry_date"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6 my-2">
+            <label for="document_image">Document Image</label>
+            <input
+              type="file"
+              name="document_image"
+              id="documnet_image"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+        <input
+          type="submit"
+          value="Save"
+          class="my-2 btn btn-sm btn-primary"
+          :disabled="!allGood"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block script %}
+<script src="{% static 'js/axios.min.js' %}"></script>
+<script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/vee-vilidate.js' %}"></script>
+<script src="{% static 'js/car/car-document.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'cars/master.html' %} {% block content %}
+<div class="container">
+  <div class="top-car-main pt-2">
+    <a href="{% url 'create_driver' %}" class="btn btn-sm btn-primary"
+      >Create new driver</a
+    >
+  </div>
+</div>
+<hr />
+<div class="container">
+  <h1>Drivers</h1>
+  <div class="cars-box">
+    <table class="table table-responsive elevate">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Shift</th>
+          <th>NIC</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for driver in drivers %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{driver.name}}</td>
+          <td>
+            <img class="driver-img-main" src="{{ driver.image.url }}" alt="" />
+          </td>
+          <td>{{driver.shift.type}}</td>
+          <td>{{driver.nic}}</td>
+          <td>
+            <a
+              href="{% url 'single_driver' driver.id %}"
+              class="btn btn-sm btn-primary"
+              >View</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

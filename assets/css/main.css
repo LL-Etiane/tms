@@ -1,0 +1,164 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.s-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body {
+  background: #f4f6f9;
+  overflow-x: hidden;
+}
+
+.overall {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background: #32383e;
+  min-height: 100vh;
+  font-weight: bold;
+}
+
+.hidesidebar {
+  display: none !important;
+}
+.hidesidebar .links {
+  background-color: red !important;
+}
+
+.main {
+  width: 100%;
+}
+
+.main-resize {
+  margin-left: 0;
+}
+
+.main-header {
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.reducesidebarwidth {
+  width: 80px;
+}
+
+.logotitle {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #fff;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.logotitle h4 {
+  font-size: 30px;
+}
+
+.links {
+  margin-top: 2rem;
+}
+.links ul {
+  padding-left: 0 !important;
+}
+.links ul .active {
+  background-color: #007bff;
+  border-radius: 30px 0px 0px 0px;
+}
+.links ul .active select {
+  background-color: #007bff;
+}
+.links ul li {
+  margin-bottom: 0.2rem;
+  text-align: center;
+  display: flex;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border-radius: 30px 0px 0px 0px;
+}
+.links ul li .icon {
+  color: #fff;
+  font-size: 24px;
+  margin-right: 1rem;
+}
+.links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+.links ul li select:hover {
+  background-color: #007bff;
+}
+.links ul li select:after {
+  background-color: #32383e;
+}
+.links ul li select {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  background-color: #32383e;
+  color: #fff;
+}
+.links ul li select option {
+  font-size: 15px;
+  background-color: #32383e;
+  color: #fff;
+}
+.links ul li:hover {
+  background-color: #007bff;
+}
+
+#main-section-down {
+  height: 100%;
+}
+
+.s-car {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: yellow;
+  color: #000;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+}
+
+.elevate {
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* messages */
+.message {
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.message-error {
+  background-color: #942424;
+}
+
+.message-success {
+  background-color: #239b41;
+}
+
+.driver-img-main {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+}
+
+.border-right {
+  border-right: 2px solid #000;
+}

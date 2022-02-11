@@ -1,0 +1,64 @@
+{% extends 'cars/master.html' %} {% block content %} {% load static %}
+<div class="container">
+  <div class="elevate my-2 p-2">
+    <h1>Transactions records {{car.matricule}} ({{car.car_type}})</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="elevate my-2 p-2">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table border">
+          <thead>
+            <tr>
+              <th colspan="3" class="text-center">Revenues</th>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rev in revenues %}
+            <tr>
+              <td>{{rev.date}}</td>
+              <td>{{rev.name}}</td>
+              <td>{{rev.amount}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <h4>Total: <strong> {{total_rev}} FCFA</strong></h4>
+      </div>
+      <div class="col-md-6">
+        <table class="table border">
+          <thead>
+            <tr>
+              <th colspan="3" class="text-center">Expenses</th>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for exp in expenses %}
+            <tr>
+              <td>{{exp.date}}</td>
+              <td>{{exp.name}}</td>
+              <td>{{exp.amount}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <h4>Total: <strong>{{total_exp}} FCFA</strong></h4>
+      </div>
+    </div>
+    <div class="text-center py-2">
+      <h4>Result: {{result}}</h4>
+    </div>
+  </div>
+</div>
+{% endblock %}

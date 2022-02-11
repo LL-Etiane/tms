@@ -1,0 +1,55 @@
+{% extends 'cars/master.html' %} {% block content %}
+<div class="container">
+  <h1 class="text-center elevate my-1 py-2">Destiny Cars salaries</h1>
+  <div class="elevate p-2">
+    <div class="d-flex justify-content-between">
+      <div class="filter">
+        Filter by:
+        <select name="filter" id="filter">
+          <option>--Choose filter--</option>
+          <option value="driver">
+            <a href="salary/?filter=driver">Drivers</a>
+          </option>
+        </select>
+      </div>
+      <div class="actions">
+        <a href="{% url 'register_salary' %}" class="btn btn-sm btn-primary">
+          Pay new salary
+        </a>
+      </div>
+    </div>
+    <div class="my-2">
+      {% if salaries %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Month</th>
+            <th>Advancement</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for salary in salaries %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{salary.salary_for}}</td>
+            <td>{{salary.salary_for_name}}</td>
+            <td>{{salary.month}}</td>
+            <td>{{salary.advancement}}</td>
+            <td>{{salary.amount}}</td>
+            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <h4 class="text-center py-4">No salary record yet</h4>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'cars/master.html' %} {% block content %} {% load static %}
+<div class="container">
+  <div class="elevate my-2 p-2">
+    <h1>Add expense related to {{car.matricule}} ({{car.car_type}})</h1>
+    <form method="POST" action="{% url 'car_expense' car.id %}">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name">Expense name</label>
+            {% csrf_token %}
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="amount">Amount (FCFA)</label>
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="description">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            class="form-control"
+          ></textarea>
+        </div>
+        <div class="col-md-6 text-center m-auto">
+          <input type="submit" value="Save" class="btn btn-sm btn-primary" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

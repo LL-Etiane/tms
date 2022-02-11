@@ -1,0 +1,52 @@
+{% extends 'cars/master.html' %} {% block content %}
+<div class="container">
+  <div class="top-car-main pt-2">
+    <a href="{% url 'add_car' %}" class="btn btn-sm btn-primary">Add a car</a>
+  </div>
+</div>
+<hr />
+<div class="container">
+  <h1>Cars</h1>
+  <div class="cars-box">
+    <table class="table table-responsive elevate">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Matricule</th>
+          <th>Car type</th>
+          <th>Task</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in cars %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{car.matricule}}</td>
+          <td>{{car.car_type}}</td>
+          <td>
+            <a
+              href="{% url 'car_revenue' car.id %}"
+              class="btn btn-sm btn-success"
+              >Revenue</a
+            >
+            <a
+              href="{% url 'car_expense' car.id %}"
+              class="btn btn-sm btn-danger"
+              >Expenses</a
+            >
+          </td>
+          <td>
+            <a
+              href="{% url 'single_car' car.id %}"
+              class="btn btn-sm btn-primary"
+              >View</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
