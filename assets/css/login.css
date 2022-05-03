@@ -1,4 +1,6 @@
 body {
+  height: 100vh;
+  width: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../images/bg.jpg");
   background-size: cover;
@@ -6,15 +8,21 @@ body {
 }
 
 .main-container {
-  position: relative;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .caption-container {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -20%);
+  margin-bottom: 1rem;
+}
+
+.btn-yellow {
+  background-color: #ebeb2c;
+  color: #fff;
+  font-weight: bolder;
 }
 
 .login-caption {
@@ -23,22 +31,14 @@ body {
 }
 
 .login-container {
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-bottom: 4px;
-  position: absolute;
-  border: 2px solid #ebeb2c;
-  border-radius: 10px;
   width: 400px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: yellow;
+  color: #ebeb2c;
 }
 
 .login-avatar {
   background-color: #fff;
   color: yellow;
+  font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,4 +48,14 @@ body {
   text-align: center;
   margin: auto;
   margin-top: -30px;
+}
+
+@media (max-width: 769px) {
+  .login-caption {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .login-container {
+    width: 300px;
+  }
 }

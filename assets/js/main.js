@@ -4,11 +4,9 @@ mainsection = document.getElementById("mainsection");
 mainsectionDown = document.getElementById("main-section-down");
 sidbarToggler = document.getElementById("togglesidebar");
 
-mainsectionDown.addEventListener("click", () => {
-  if (window.screen.width <= 780) {
-    hideSidebar();
-  }
-});
+if (window.screen.width <= 780) {
+  hideSidebar();
+}
 
 function hideSidebar() {
   if (showSideBar) {
